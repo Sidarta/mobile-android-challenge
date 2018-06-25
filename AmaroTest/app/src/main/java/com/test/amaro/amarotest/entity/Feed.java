@@ -2,10 +2,7 @@ package com.test.amaro.amarotest.entity;
 
 import java.util.List;
 
-/**
- * Feed could have other fields like timestamp, pagination, and other features to work with list of products
- * For this test, because we are only getting the whole list, we are working only with a list of products here
- */
+
 public class Feed {
 
     private List<Product> products;
@@ -25,3 +22,5 @@ public class Feed {
         this.products = products;
     }
 }
+
+//TODO instead of whole list, we could use pagination - need API for that

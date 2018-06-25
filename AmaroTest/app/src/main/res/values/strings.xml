@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">AmaroTest</string>
+    <string name="app_name">LOL</string>
+    <string name="menu_refresh">Atualizar</string>
+    <string name="error_feed">Erro no carregamento de produtos</string>
 </resources>

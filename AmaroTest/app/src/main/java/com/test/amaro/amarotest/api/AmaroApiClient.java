@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AmaroApiClient {
 
     //using the mocked URL
-    private static String BASE_URL = "http://www.mocky.io/v2/";
+    private String BASE_URL = "http://www.mocky.io/";
 
     public Retrofit getClient() {
         Gson gson = new GsonBuilder()

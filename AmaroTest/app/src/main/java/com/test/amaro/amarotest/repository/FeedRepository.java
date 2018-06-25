@@ -4,6 +4,6 @@ import com.test.amaro.amarotest.callback.OnGetFeed;
 
 public interface FeedRepository {
 
-    public void getFeed(OnGetFeed onGetFeed);
+    void getFeed(OnGetFeed onGetFeed);
 
 }

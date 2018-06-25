@@ -1,5 +1,7 @@
 package com.test.amaro.amarotest.repository.implementation;
 
+import android.util.Log;
+
 import com.test.amaro.amarotest.api.AmaroApi;
 import com.test.amaro.amarotest.api.AmaroApiClient;
 import com.test.amaro.amarotest.callback.OnGetFeed;
@@ -31,16 +33,18 @@ public class FeedRepositoryImplementation implements FeedRepository{
                     List<Product> products = response.body().getProducts();
                     onGetFeed.onGetFeedSuccessful(products);
                     //log success
+                    Log.d("Repository", "get feed on success");
                 } else {
-                    onGetFeed.onGetFeedFailiure("Response not successful");
+                    onGetFeed.onGetFeedFailiure("Response not successful"); //TODO strings
                     //log err
                 }
             }
 
             @Override
             public void onFailure(Call<Feed> call, Throwable t) {
-                onGetFeed.onGetFeedFailiure("Call failed");
+                onGetFeed.onGetFeedFailiure("Call failed"); //TODO strings
                 //log failure
+                Log.d("Repository", "get feed on failure");
             }
         });
     }

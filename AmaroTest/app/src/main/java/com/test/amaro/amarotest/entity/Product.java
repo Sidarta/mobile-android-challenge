@@ -2,9 +2,9 @@ package com.test.amaro.amarotest.entity;
 
 public class Product {
 
-    private String nome;
+    private String name;
     private int style;
-    private int code_color;
+    private String code_color;
     private String color_slug;
     private String Color;
     private Boolean sale;
@@ -17,8 +17,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(String nome, int style, int code_color, String color_slug, String color, Boolean sale, String regular_price, String actual_price, String discount_percentage, String installments, String image) {
-        this.nome = nome;
+    public Product(String name, int style, String code_color, String color_slug, String color, Boolean sale, String regular_price, String actual_price, String discount_percentage, String installments, String image) {
+        this.name = name;
         this.style = style;
         this.code_color = code_color;
         this.color_slug = color_slug;
@@ -31,12 +31,12 @@ public class Product {
         this.image = image;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getStyle() {
@@ -47,11 +47,11 @@ public class Product {
         this.style = style;
     }
 
-    public int getCode_color() {
+    public String getCode_color() {
         return code_color;
     }
 
-    public void setCode_color(int code_color) {
+    public void setCode_color(String code_color) {
         this.code_color = code_color;
     }
 
