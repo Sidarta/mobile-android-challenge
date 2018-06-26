@@ -16,10 +16,8 @@ public class Product implements Parcelable, Comparable<Product> {
     private String code_color;
     private String color_slug;
     private String color;
-
     @SerializedName("on_sale")
     private Boolean sale;
-
     private String regular_price;
     private String actual_price;
     private String discount_percentage;
