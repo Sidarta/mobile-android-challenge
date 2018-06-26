@@ -1,3 +1,57 @@
+# Challenge Feedback from Developer (Sidarta)
+
+## Overview
+
+The challenge was completed with overall requirements implemented. The idea was to use a good architecture even though this project is quite simple.
+
+Hope you like it, any feedback is much appreciated!
+
+Project is using:
+- Retrofit for API
+- Picasso for Image handling
+- Butter Knife for clean and easy binding
+- Swipe to refresh on products list
+- MVP Architecture
+
+It contains two main screens: 
+- List of Products
+- Product Details
+
+It also has a contextual menu for actions on Products List screen.
+
+## Architecture
+
+The proposed app architecture is an implementation of MVP - Model View Presenter. Main goal is to explicitly separate model from the view and create interfaces for the Presenter (as know as Controllers on older architectures). With that, is clear to the developer on where to put methods and actions, depending on which feature is being implemented - View interface handles actions that happens on the view and Presentation methods handles business logic that influences what is being shown on the Activity. Also with this schema, it's clear on where to perform API/Database requests (and that is our Repository). 
+
+All of this leads to a better structured project, that makes it easier to maintain, to iterate over, to implement new features, and even to do code reviews, deployments, etc. 
+
+The next iteration architecture-wise would be to implement *Clean Architecture*, using Dagger2. That would be the goal for a bigger project. It was not implemented here because the scope and time of this challenge. 
+
+## Layouts
+
+Layouts proposed follows basic material design guidelines. It's a simple UI that conveys what was required. It could be better planned with a few interesting UI interactions, animations and components, but because of the scope and time, that was left aside. 
+
+Swipe to refresh was implemented to make it easier for refreshing the list.
+
+A few comments on my ideas (there are plenty, but listing just a few to illustrate)
+- Put a badge on the list of products indicating what products are on sale. On this case, we could also highlight the price difference and the discount
+- Better handling of images and tap to expand the product image
+- UI element on the list to show filter options like: sale products and ordering parameters
+
+## Tests
+
+It was an extra requirement, for bonus points, I know... I tried... 
+
+I already worked on projects using SonarQube and a little bit with Unit tests. On this challenge I did a simple example on that, but Test Automation is an area that I'm still learning and enjoying.
+
+## Branching and GIT
+
+For GIT flows I used a very simple pattern for commit messages. Usually inside brackets we would put the number of the corresponding ticket (JIRA number for example). On this project, it just states what is the scope of the change (miscellaneous, features, tests).
+
+For branching, I created a develop branch for code development, and merged back on master after finished v1.0. Also, created a tag indicating the end of first version. On more complex GIT flows we would create separate branches for each feature, and use code review techniques before merging them back on develop. Merge on master would happen after releases.
+
+-------------------------------
+
 # AMARO Android Challenge
 In this exercise, the proposed challenge is to create a catalogue app that displays [AMARO](https://amaro.com/)'s all-time *best-sellers*.
 
