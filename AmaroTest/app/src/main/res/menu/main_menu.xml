@@ -7,4 +7,14 @@
         android:title="@string/menu_refresh"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/sortprice"
+        android:title="@string/sort_by_price_ascending"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/showonlyonsale"
+        android:title="@string/filter_on_sale_menu"
+        app:showAsAction="never" />
+
 </menu>

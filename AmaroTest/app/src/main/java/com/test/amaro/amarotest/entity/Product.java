@@ -1,34 +1,85 @@
 package com.test.amaro.amarotest.entity;
 
-public class Product {
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Product implements Parcelable, Comparable<Product> {
 
     private String name;
     private int style;
     private String code_color;
     private String color_slug;
-    private String Color;
+    private String color;
+
+    @SerializedName("on_sale")
     private Boolean sale;
+
     private String regular_price;
     private String actual_price;
     private String discount_percentage;
     private String installments;
     private String image;
+    private List<Size> sizes;
 
     public Product() {
     }
 
-    public Product(String name, int style, String code_color, String color_slug, String color, Boolean sale, String regular_price, String actual_price, String discount_percentage, String installments, String image) {
+    public Product(String name, int style, String code_color, String color_slug, String color, Boolean sale, String regular_price, String actual_price, String discount_percentage, String installments, String image, List<Size> sizes) {
         this.name = name;
         this.style = style;
         this.code_color = code_color;
         this.color_slug = color_slug;
-        Color = color;
+        this.color = color;
         this.sale = sale;
         this.regular_price = regular_price;
         this.actual_price = actual_price;
         this.discount_percentage = discount_percentage;
         this.installments = installments;
         this.image = image;
+        this.sizes = sizes;
+    }
+
+    protected Product(Parcel in) {
+        name = in.readString();
+        style = in.readInt();
+        code_color = in.readString();
+        color_slug = in.readString();
+        color = in.readString();
+        byte tmpSale = in.readByte();
+        sale = tmpSale == 0 ? null : tmpSale == 1;
+        regular_price = in.readString();
+        actual_price = in.readString();
+        discount_percentage = in.readString();
+        installments = in.readString();
+        image = in.readString();
+
+        sizes = new ArrayList<Size>();
+        in.readTypedList(sizes, Size.CREATOR);
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
+    //custom method
+    //another option to get actual price - as float
+    public float actualPriceAsFloat(){
+        String onlyNumbers = this.actual_price.substring(3);
+        return Float.parseFloat(onlyNumbers.replaceAll(",", "."));
     }
 
     public String getName() {
@@ -64,11 +115,11 @@ public class Product {
     }
 
     public String getColor() {
-        return Color;
+        return color;
     }
 
     public void setColor(String color) {
-        Color = color;
+        this.color = color;
     }
 
     public Boolean getSale() {
@@ -118,4 +169,54 @@ public class Product {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public List<Size> getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(List<Size> sizes) {
+        this.sizes = sizes;
+    }
+
+    /*
+    Parcelable interface
+     */
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeInt(style);
+        dest.writeString(code_color);
+        dest.writeString(color_slug);
+        dest.writeString(color);
+        dest.writeByte((byte) (sale == null ? 0 : sale ? 1 : 2));
+        dest.writeString(regular_price);
+        dest.writeString(actual_price);
+        dest.writeString(discount_percentage);
+        dest.writeString(installments);
+        dest.writeString(image);
+        dest.writeTypedList(sizes);
+    }
+
+    /*
+    Comparable Interface - for ordering purposes
+   */
+    @Override
+    public int compareTo(@NonNull Product product) {
+
+        float priceFloatProd = product.actualPriceAsFloat();
+        float priceFloatThis = this.actualPriceAsFloat();
+
+        if((priceFloatThis - priceFloatProd) < 0)
+            return -1;
+        else
+            return 1;
+    }
+
+
+
 }

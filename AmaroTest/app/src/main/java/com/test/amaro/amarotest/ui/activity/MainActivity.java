@@ -18,6 +18,7 @@ import com.test.amaro.amarotest.ui.activity.presenter.implementation.MainActivit
 import com.test.amaro.amarotest.ui.adapter.FeedAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -70,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
         mMainActivityPresenter = new MainActivityPresenterImplementation(this, this);
 
         //initial loading
+        this.goToTopOfList();
+        mMainActivityPresenter.getFeed();
         mFeedSwipeRefreshLayout.setRefreshing(true);
     }
 
@@ -77,8 +80,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     protected void onResume() {
         super.onResume();
         this.goToTopOfList(); //TODO thinking.. could save user state - leave where he left
-        mMainActivityPresenter.getFeed();
-        mFeedSwipeRefreshLayout.setRefreshing(true);
+//        mMainActivityPresenter.getFeed();
+//        mFeedSwipeRefreshLayout.setRefreshing(true);
     }
 
     /*
@@ -112,6 +115,29 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
         Snackbar.make(mFeedRecyclerView, R.string.error_feed, Snackbar.LENGTH_LONG).show();
     }
 
+    @Override
+    public void sortFeed() {
+        Collections.sort(mProductsList);
+        mFeedAdapter.updateFeed(mProductsList);
+        mFeedSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void feedWithOnlyProductsOnSale() {
+        List<Product> productsListAux = new ArrayList<Product>();
+
+        for (Product prod:mProductsList) {
+            if(prod.getSale()){
+                productsListAux.add(prod);
+            }
+        }
+        mProductsList.clear();
+        mProductsList = productsListAux;
+        mFeedAdapter.updateFeed(mProductsList);
+        mFeedSwipeRefreshLayout.setRefreshing(false);
+    }
+
+
     /*
     Action Bar Menu
      */
@@ -138,6 +164,15 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
                 swipeOnRefreshUpdateProductsList();
 
                 return true;
+
+            case R.id.sortprice:
+                mFeedSwipeRefreshLayout.setRefreshing(true);
+                this.sortFeed();
+
+            case R.id.showonlyonsale:
+                mFeedSwipeRefreshLayout.setRefreshing(true);
+                this.feedWithOnlyProductsOnSale();
+
         }
 
         return super.onOptionsItemSelected(item);

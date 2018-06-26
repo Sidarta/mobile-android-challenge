@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">LOL</string>
+    <string name="app_name">Amaro Best-Sellers</string>
     <string name="menu_refresh">Atualizar</string>
     <string name="error_feed">Erro no carregamento de produtos</string>
+    <string name="sort_by_price_ascending">Ordenar por preço</string>
+    <string name="filter_on_sale_menu">On Sale</string>
+    <string name="on_sale">ON SALE</string>
 </resources>

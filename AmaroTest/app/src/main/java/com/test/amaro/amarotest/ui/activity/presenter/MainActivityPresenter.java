@@ -12,5 +12,7 @@ public interface MainActivityPresenter {
         void refreshProductList(List<Product> products);
         void goToTopOfList();
         void showErrorMessage();
+        void sortFeed();
+        void feedWithOnlyProductsOnSale();
     }
 }

@@ -1,7 +1,9 @@
 package com.test.amaro.amarotest.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,8 +16,10 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.test.amaro.amarotest.R;
 import com.test.amaro.amarotest.entity.Product;
+import com.test.amaro.amarotest.ui.activity.ProductDetailsActivity;
 import com.test.amaro.amarotest.ui.adapter.presenter.FeedAdapterPresenter;
 import com.test.amaro.amarotest.ui.adapter.presenter.implementation.FeedAdapterPresenterImplementation;
+import com.test.amaro.amarotest.utils.Constants;
 
 import java.util.List;
 
@@ -48,7 +52,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> im
 
     @Override
     public void onBindViewHolder(@NonNull FeedAdapter.ViewHolder holder, int position) {
-        Product product = this.mProductList.get(position);
+        final Product product = this.mProductList.get(position);
         holder.productName.setText(product.getName());
         holder.productPrice.setText(product.getActual_price());
 
@@ -59,7 +63,16 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> im
                 .error(R.drawable.product_placeholder)
                 .into(holder.productImage);
 
-        //on click
+        //on click - start product details activity
+        holder.productCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //start product details activity
+                Intent intent = new Intent(mContext, ProductDetailsActivity.class);
+                intent.putExtra(Constants.EXTRA_PRODUCT, product);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
